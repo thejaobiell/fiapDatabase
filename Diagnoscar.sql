@@ -1,0 +1,4 @@
+-- Diagnoscar 
+-- João Gabriel Boaventura Marques e Silva RM554874
+-- Lucas de Melo Pinho Pinheiro RM558791
+-- Lucas Leal das Chagas RM551124
