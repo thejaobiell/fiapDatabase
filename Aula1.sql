@@ -82,4 +82,3 @@ CREATE TABLE EXERCICIO_DISCIPLINA (
                            CONSTRAINT disciplina_nm_uk UNIQUE,
     carga_hora number(4)   CONSTRAINT disciplina_carga_hora NOT NULL
 );
-    
