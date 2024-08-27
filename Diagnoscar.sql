@@ -24,7 +24,7 @@ CREATE TABLE Assistente (
     Plano_Chatbot VARCHAR2(10) NOT NULL,
     Tipodechat_Chatbot CHAR(1) NOT NULL,
     Cliente_CPF_Cliente VARCHAR2(14),
-    CONSTRAINT FK_CPF_Clie FOREIGN KEY (Cliente_CPF_Cliente) REFERENCES Cliente(CPF_Cliente)
+    CONSTRAINT FK_CPF_Cliente FOREIGN KEY (Cliente_CPF_Cliente) REFERENCES Cliente(CPF_Cliente)
 );
 
 -- Tabela Loja_Parceira
@@ -42,7 +42,6 @@ CREATE TABLE Pre_Diagnostico (
 );
 
 -- Tabela Peca
--- ****************************
 CREATE TABLE Peca (
     ID_Peca NUMBER PRIMARY KEY NOT NULL,
     Descricao_Peca VARCHAR2(100),
@@ -53,25 +52,69 @@ CREATE TABLE Peca (
 -- Tabela Entrega
 CREATE TABLE Entrega (
     ID NUMBER PRIMARY KEY NOT NULL,
-    Loja_Parceira_Endereco_Loja VARCHAR2(200),
-    CONSTRAINT FK_Entrega_Loja FOREIGN KEY (Loja_Parceira_Endereco_Loja) REFERENCES Loja_Parceira(Endereco_Loja)
+    Loja_Parceira_Endereco VARCHAR2(200),
+    CONSTRAINT FK_Entrega_Loja FOREIGN KEY (Loja_Parceira_Endereco) REFERENCES Loja_Parceira(Endereco_Loja)
 );
 
 -- Tabela Vincula
 CREATE TABLE Vincula (
-    Assistente_Cliente_CPF_Cliente VARCHAR2(14),
-    Loja_Parceira_Endereco_Loja VARCHAR2(200),
-    CONSTRAINT FK_Vincula_Assistente FOREIGN KEY (Assistente_Cliente_CPF_Cliente) REFERENCES Assistente(Cliente_CPF_Cliente),
-    CONSTRAINT FK_Vincula_Loja FOREIGN KEY (Loja_Parceira_Endereco_Loja) REFERENCES Loja_Parceira(Endereco_Loja)
+    Assistente_CPF_Cliente VARCHAR2(14),
+    Loja_Parceira_Endereco VARCHAR2(200),
+    CONSTRAINT FK_Vincula_Assistente FOREIGN KEY (Assistente_CPF_Cliente) REFERENCES Assistente(Cliente_CPF_Cliente),
+    CONSTRAINT FK_Vincula_Loja FOREIGN KEY (Loja_Parceira_Endereco) REFERENCES Loja_Parceira(Endereco_Loja),
+    PRIMARY KEY (Assistente_CPF_Cliente, Loja_Parceira_Endereco)  -- Assuming this combination should be unique
 );
 
+-- Dropping tables
+DROP TABLE Cliente;
+DROP TABLE Automovel;
+DROP TABLE Assistente;
+DROP TABLE Loja_Parceira;
+DROP TABLE Pre_Diagnostico;
+DROP TABLE Peca;
+DROP TABLE Entrega;
+DROP TABLE Vincula;
 
 
-DROP TABLE Cliente CASCADE CONSTRAINTS;
-DROP TABLE Automovel CASCADE CONSTRAINTS;
-DROP TABLE Assistente CASCADE CONSTRAINTS;
-DROP TABLE Loja_Parceira CASCADE CONSTRAINTS;
-DROP TABLE Pre_Diagnostico CASCADE CONSTRAINTS;
-DROP TABLE Peca CASCADE CONSTRAINTS;
-DROP TABLE Entrega CASCADE CONSTRAINTS;
-DROP TABLE Vincula CASCADE CONSTRAINTS;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Primeiro, remova as tabelas que têm chaves estrangeiras
+-- Se a tabela Vincula referenciar Assistente e Loja_Parceira
+DROP TABLE Vincula;
+
+-- Se a tabela Entrega referenciar Loja_Parceira
+DROP TABLE Entrega;
+
+-- Se a tabela Peca referenciar Loja_Parceira
+DROP TABLE Peca;
+
+-- Se a tabela Pre_Diagnostico referenciar Assistente
+DROP TABLE Pre_Diagnostico;
+
+-- Se a tabela Assistente referenciar Cliente
+DROP TABLE Assistente;
+
+-- Se a tabela Automovel referenciar Cliente
+DROP TABLE Automovel;
+
+-- Finalmente, remova as tabelas restantes sem chaves estrangeiras
+DROP TABLE Cliente;
+
+-- Loja_Parceira deve ser removida por último se outras tabelas referenciam ela
+DROP TABLE Loja_Parceira;
