@@ -28,23 +28,42 @@ Variações:
 
 drop table teste cascade constraints;
 create table teste (nome number(4));
-- incluir na tabela teste a colna codigo de tipo númerica com 4 posições
 desc teste;
+
+-- incluir na tabela teste a colna codigo de tipo númerica com 4 posições
 alter table teste add codigo number(4)
 desc teste;
 
-- incluir na coluna código da table teste a pk.
+-- incluir na coluna código da table teste a pk.
 alter table teste add constraint teste_cd_pk primary key (codigo);
 -- ou
 alter table teste add primary key (codigo);
 desc teste;
 
-- alterar o tipo de dados da coluna nome para alfanmérico com 30 posições
+-- alterar o tipo de dados da coluna nome para alfanmérico com 30 posições
 alter table teste modify nome varchar(30);
+desc teste;
 
-- alterar o tamanho da coluna nome para 45 posições;
+-- alterar o tamanho da coluna nome para 45 posições;
 alter table teste modify nome varchar(45)
+desc teste;
 
-- apagar a pk da coluna código
+-- apagar a pk da coluna código
 alter table teste drop constraint teste_cd_pk;
 desc teste;
+
+-- apagar a coluna código da tabela teste.
+alter table teste drop column codigo;
+desc teste;
+
+-- renomear a coluna nome para nome_cliente.
+alter table teste rename column nome to nome_cliente;
+desc teste;
+
+-- incluir a regra not null na coluna nome_cliente.
+alter table teste modify nome_cliente varchar2(45) not null;
+desc teste;
+            -- cuidado, existe uma pegadinha com notnull
+            alter table teste modify nome_cliente varchar(45) not null;
+
+DML - Data Manupulation Language - Dados
