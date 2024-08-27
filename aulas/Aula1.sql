@@ -11,6 +11,12 @@
 -- ALTER   - Altera a estrutura de tabelas já existentes.
 -- DROP    - Apaga tabelas do banco de dados.
 
+--SINTAXE
+/*Create table NomeDaTabela(
+    NomeColuna1 TipoDeDado(Tamanho) [constraint],
+    NomeColuna2 TipoDeDado(Tamanho) [constraint]
+    ......................);*/
+
 -- Exemplo de Estrutura de Tabela: Funcionario
 -- Tabela: Funcionario
 --     mat_fun - N - 4 - PK       -- Número do funcionário (Primary Key)
