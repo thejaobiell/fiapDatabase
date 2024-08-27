@@ -122,6 +122,8 @@ CREATE TABLE funcionario_2024 (
 
 desc funcionario_2024;
 select sysdate from dual;
-insert into funcionario_2024(0001,'João',sysdate,null,'M',6);
-insert into funcionario_2024(0002,'Guilherme','10-jan-22',100000,'M',6);
-insert into funcionario_2024(0003,'Felipe','22-dec-24',15000,'M',6);
+insert into funcionario_2024 values(0001,'João',sysdate,null,'M',6);
+insert into funcionario_2024 values(0002,'Guilherme','10-jan-22',100000,'M',6);
+insert into funcionario_2024 values(0003,'Felipe','22-dec-24',15000,'M',6);
+
+select * from funcionario_2024
