@@ -76,6 +76,7 @@ DROP TABLE Entrega;
 DROP TABLE Vincula;
 
 
+<<<<<<< HEAD
 
 
 
@@ -118,3 +119,13 @@ DROP TABLE Cliente;
 
 -- Loja_Parceira deve ser removida por último se outras tabelas referenciam ela
 DROP TABLE Loja_Parceira;
+=======
+DROP TABLE Cliente CASCADE CONSTRAINTS;
+DROP TABLE Automovel CASCADE CONSTRAINTS;
+DROP TABLE Assistente CASCADE CONSTRAINTS;
+DROP TABLE Loja_Parceira CASCADE CONSTRAINTS;
+DROP TABLE Pre_Diagnostico CASCADE CONSTRAINTS;
+DROP TABLE Peca CASCADE CONSTRAINTS;
+DROP TABLE Entrega CASCADE CONSTRAINTS;
+DROP TABLE Vincula CASCADE CONSTRAINTS;
+>>>>>>> 198c7ba0738bea341c14d16ac66327c1b17fad4a
