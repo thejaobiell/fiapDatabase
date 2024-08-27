@@ -42,7 +42,6 @@ CREATE TABLE Pre_Diagnostico (
 );
 
 -- Tabela Peca
--- ****************************
 CREATE TABLE Peca (
     ID_Peca NUMBER PRIMARY KEY NOT NULL,
     Descricao_Peca VARCHAR2(100),
