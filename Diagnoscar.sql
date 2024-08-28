@@ -74,7 +74,7 @@ CREATE TABLE Vincula (
 
 -- Inser��es para a Tabela Cliente
 INSERT INTO Cliente 
-VALUES ('539.371.598-60', 8672017436, 'Jo�o Gabriel', 'Boaventura Marques e Silva', 'joao.silva@gmail.com.br', '(11) 9936-5770', 'Rua das Flores, 123, S�o Paulo, SP');
+VALUES ('539.371.598-60', 8672017436, 'João Gabriel', 'Boaventura Marques e Silva', 'joao.silva@gmail.com.br', '(11) 9936-5770', 'Rua das Flores, 123, São Paulo, SP');
 
 
 -- Inser��es para a Tabela Automovel
@@ -84,19 +84,19 @@ INSERT INTO Automovel VALUES ('ABC1D23', '123.456.789-00', 'Fusca', 1980);
 INSERT INTO Assistente VALUES ('chat123', SYSDATE, 'Premium', 'A', '123.456.789-00');
 
 -- Inser��es para a Tabela Loja_Parceira
-INSERT INTO Loja_Parceira VALUES ('Rua do Com�rcio, 456, S�o Paulo, SP', 'Loja do Mec�nico');
+INSERT INTO Loja_Parceira VALUES ('Rua do Comércio, 456, São Paulo, SP', 'Loja do Mecânico');
 
 -- Inser��es para a Tabela Pre_Diagnostico
 INSERT INTO Pre_Diagnostico VALUES (1, 'Problema no sistema de freios', 'chat123');
 
 -- Inser��es para a Tabela Peca
-INSERT INTO Peca VALUES (1, 'Pastilha de Freio', 'Rua do Com�rcio, 456, S�o Paulo, SP');
+INSERT INTO Peca VALUES (1, 'Pastilha de Freio', 'Rua do Comércio, 456, São Paulo, SP');
 
 -- Inser��es para a Tabela Entrega
-INSERT INTO Entrega VALUES (1, 'Rua do Com�rcio, 456, S�o Paulo, SP');
+INSERT INTO Entrega VALUES (1, 'Rua do Comércio, 456, São Paulo, SP');
 
 -- Inser��es para a Tabela Vincula
-INSERT INTO Vincula VALUES ('123.456.789-00', 'Rua do Com�rcio, 456, S�o Paulo, SP');
+INSERT INTO Vincula VALUES ('123.456.789-00', 'Rua do Comércio, 456, São Paulo, SP');
 
 
 
@@ -108,7 +108,7 @@ DROP TABLE Pre_Diagnostico;
 DROP TABLE Assistente;
 DROP TABLE Automovel;
 DROP TABLE Cliente;
-DROP TABLE Loja_Parceira;
+DROP TABLE Loja_Parceira
 =======
 DROP TABLE Cliente CASCADE ConstraintS;
 DROP TABLE Automovel CASCADE ConstraintS;
