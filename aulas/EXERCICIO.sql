@@ -1,7 +1,9 @@
 -- 01.Criar a tabela CIDADE, conforme a especificação abaixo
 CREATE TABLE CIDADE (
     Codigo INT NOT NULL PRIMARY KEY,
-    Nome VARCHAR(30) NOT NULL         
+    Nome VARCHAR(30) NOT NULL,
+    CONSTRAINT PK_CIDADE PRIMARY KEY (Codigo),
+    CONSTRAINT CHK_Nome_Cidade CHECK (Nome <> '')
 );
 
 -- 02.Criar a tabela SOCIO, conforme a especificação abaixo.
@@ -11,7 +13,10 @@ CREATE TABLE SOCIO (
     DataNasc DATE NOT NULL,
     RG VARCHAR2(15) NOT NULL,
     Cidade INT NOT NULL,
-    FOREIGN KEY (Cidade) REFERENCES CIDADE(Codigo)
+    CONSTRAINT PK_SOCIO PRIMARY KEY (CPF),
+    CONSTRAINT CHK_Nome_Socio CHECK (Nome <> ''),
+    CONSTRAINT CHK_RG_Socio CHECK (RG <> ''),
+    CONSTRAINT FK_Cidade FOREIGN KEY (Cidade) REFERENCES CIDADE(Codigo)
 );
 
 -- 03. Alterar a tabela CIDADE para incluir nela o campo abaixo especificado
@@ -28,9 +33,11 @@ ALTER TABLE SOCIO MODIFY Nome VARCHAR2(35);
 DESC SOCIO;
 
 -- 06. Criar a tabela SETOR, conforme a especificação abaixo
-CREATE TABLE SETOR(
-    Codigo number(3) PRIMARY KEY NOT NULL,
-    Nome varchar2(30) not null
+CREATE TABLE SETOR (
+    Codigo NUMBER(3) NOT NULL,
+    Nome VARCHAR2(30) NOT NULL,
+    CONSTRAINT PK_SETOR PRIMARY KEY (Codigo),
+    CONSTRAINT CHK_Nome_Setor CHECK (Nome <> '')
 );
 
 -- 07. Alterar a tabela SÓCIO para incluir o campo abaixo especificado.
@@ -39,12 +46,14 @@ ALTER TABLE SOCIO ADD CONSTRAINT fk_setor FOREIGN KEY (Setor) REFERENCES SETOR(C
 ;
 
 -- 08. Criar a tabela DEPENDENTE, conforme a especificação abaixo.
-Create table DEPENDEDENTE(
-    Socio CHAR not null,
-    Numero number(4) primary key not null,
-    Nome varchar2(30) not null,
-    DataNasc date not null,
-    FOREIGN KEY (Socio) REFERENCES Socio(CPF)
+CREATE TABLE DEPENDENTE (
+    Socio CHAR(11) NOT NULL,
+    Numero NUMBER(4) NOT NULL,
+    Nome VARCHAR2(30) NOT NULL,
+    DataNasc DATE NOT NULL,
+    CONSTRAINT PK_DEPENDENTE PRIMARY KEY (Socio, Numero),
+    CONSTRAINT CHK_Nome_Dependente CHECK (Nome <> ''),
+    CONSTRAINT FK_Socio FOREIGN KEY (Socio) REFERENCES SOCIO(CPF)
 );
 
 INSERT INTO CIDADE (Codigo, Nome, Uf) VALUES (1, 'São Paulo', 'SP');
@@ -66,3 +75,11 @@ INSERT INTO DEPENDENTE (Socio, Numero, Nome, DataNasc) VALUES ('12345678901', 1,
 INSERT INTO DEPENDENTE (Socio, Numero, Nome, DataNasc) VALUES ('12345678901', 2, 'Mariana Silva', TO_DATE('2007-11-25', 'YYYY-MM-DD'));
 INSERT INTO DEPENDENTE (Socio, Numero, Nome, DataNasc) VALUES ('23456789012', 1, 'Pedro Oliveira', TO_DATE('2010-02-20', 'YYYY-MM-DD'));
 INSERT INTO DEPENDENTE (Socio, Numero, Nome, DataNasc) VALUES ('34567890123', 1, 'Júlia Santos', TO_DATE('2008-09-30', 'YYYY-MM-DD'));
+
+
+
+DROP TABLE DEPENDENTE CASCADE CONSTRAINTS;
+DROP TABLE SOCIO CASCADE CONSTRAINTS;
+DROP TABLE SETOR CASCADE CONSTRAINTS;
+DROP TABLE CIDADE CASCADE CONSTRAINTS;
+
