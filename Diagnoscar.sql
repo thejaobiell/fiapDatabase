@@ -5,10 +5,10 @@ CREATE TABLE Cliente (
     Nome_Cliente VARCHAR2(100) NOT NULL,
     Sobrenome_Cliente VARCHAR2(100) NOT NULL,
     Email_Cliente VARCHAR2(100) UNIQUE,
-    Celular_Cliente VARCHAR2(15) UNIQUE,
-    Endereco VARCHAR2(200) NOT NULL,
+    Telefone_Cliente VARCHAR2(15) UNIQUE,
+    Endereco_Cliente VARCHAR2(200) NOT NULL,
     CONSTRAINT CHK_CPF_VALIDO CHECK (REGEXP_LIKE(CPF_Cliente, '^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$')),
-    CONSTRAINT CHK_Celular_VALIDO CHECK (REGEXP_LIKE(Celular_Cliente, '^\(\d{2}\) \d{5}-\d{4}$')),
+    CONSTRAINT CHK_Telefone_VALIDO CHECK (REGEXP_LIKE(Telefone_Cliente, '^\(\d{2}\) \d{5}-\d{4}$')),
     CONSTRAINT CHK_Email_VALIDO CHECK (REGEXP_LIKE(Email_Cliente, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')),
     CONSTRAINT Cliente_PK PRIMARY KEY (CPF_Cliente)
 );
@@ -47,49 +47,62 @@ CREATE TABLE Pre_Diagnostico (
     CONSTRAINT PreDiagnostico_Chatbot_FK FOREIGN KEY (Chatbot_ID_Chatbot) REFERENCES Chatbot(ID_Chatbot)
 );
 
--- Tabela Oficina_Parceira
-CREATE TABLE Oficina_Parceira (
-    Endereco_Oficina VARCHAR2(200),
-    Cnpj_Oficina VARCHAR2(18) NOT NULL,
+-- Tabela Loja_Parceira
+CREATE TABLE Loja_Parceira (
+    Endereco_Loja VARCHAR2(200) PRIMARY KEY NOT NULL,
+    Cnpj_Loja VARCHAR2(18) NOT NULL UNIQUE,
+    Nome_Loja VARCHAR2(120) NOT NULL,
+    Avaliacao_Loja NUMBER(3, 2),
+    Especializacao_Loja VARCHAR2(50) NOT NULL,
+    CONSTRAINT Cnpj_Loja_Check CHECK (REGEXP_LIKE(Cnpj_Loja, '^[0-9]{2}\.[0-9]{3}\.[0-9]{3}/[0-9]{4}-[0-9]{2}$'))
+);
+
+-- Tabela Oficina
+CREATE TABLE Oficina (
+    Endereco_Oficina VARCHAR2(200) PRIMARY KEY NOT NULL,
+    Cnpj_Oficina VARCHAR2(18) NOT NULL UNIQUE,
     Nome_Oficina VARCHAR2(120) NOT NULL,
     Avaliacao_Oficina NUMBER(3, 2),
     Especializacao_Oficina VARCHAR2(50) NOT NULL,
-    CONSTRAINT Oficina_PK PRIMARY KEY (Endereco_Oficina, Cnpj_Oficina),
     CONSTRAINT Cnpj_Oficina_Check CHECK (REGEXP_LIKE(Cnpj_Oficina, '^[0-9]{2}\.[0-9]{3}\.[0-9]{3}/[0-9]{4}-[0-9]{2}$'))
 );
 
 -- Tabela Peca
 CREATE TABLE Peca (
-    ID_Peca NUMBER PRIMARY KEY NOT NULL,
-    Descricao_Peca VARCHAR2(100),
-    Oficina_Parceira_Endereco VARCHAR2(200),
-    CONSTRAINT FK_Oficina_Parceira FOREIGN KEY (Oficina_Parceira_Endereco) REFERENCES Oficina_Parceira(Endereco_Loja)
+    Id_Peca NUMBER PRIMARY KEY NOT NULL,
+    Tipo_Peca VARCHAR2(30) NOT NULL UNIQUE,
+    Nome_Peca VARCHAR2(40) NOT NULL,
+    Endereco_Loja VARCHAR2(200)NOT NULL,
+    CONSTRAINT Peca_Loja_Parceira_FK FOREIGN KEY (Endereco_Loja) REFERENCES Loja_Parceira(Endereco_Loja)
 );
 
 -- Tabela Entrega
 CREATE TABLE Entrega (
-    ID NUMBER PRIMARY KEY NOT NULL,
-    Oficina_Parceira_Endereco VARCHAR2(200),
-    CONSTRAINT FK_Entrega_Loja FOREIGN KEY (Oficina_Parceira_Endereco) REFERENCES Oficina_Parceira(Endereco_Loja)
+    Id_Entrega VARCHAR2(100) PRIMARY KEY NOT NULL,
+    Data_Entrega DATE NOT NULL,
+    Destino_Entrega VARCHAR2(200)NOT NULL,
+    Item_Entrega VARCHAR2(100) NOT NULL,
+    Endereco_Loja VARCHAR2(200) NOT NULL,
+    CONSTRAINT Entrega_Loja_Parceira_FK FOREIGN KEY (Endereco_Loja) REFERENCES Loja_Parceira(Endereco_Loja)
 );
 
 -- Tabela Vincula
 CREATE TABLE Vincula (
-    Assistente_CPF_Cliente VARCHAR2(14),
-    Oficina_Parceira_Endereco VARCHAR2(200),
-    CONSTRAINT FK_Vincula_Assistente FOREIGN KEY (Assistente_CPF_Cliente) REFERENCES Assistente(Cliente_CPF_Cliente),
-    CONSTRAINT FK_Vincula_Loja FOREIGN KEY (Oficina_Parceira_Endereco) REFERENCES Oficina_Parceira(Endereco_Loja),
-    PRIMARY KEY (Assistente_CPF_Cliente, Oficina_Parceira_Endereco)
+    CPF_Cliente VARCHAR2(14) NOT NULL,
+    ID_Chatbot VARCHAR2(1000) NOT NULL,
+    Endereco_Loja VARCHAR2(200),
+    CONSTRAINT Vincula_PK PRIMARY KEY (CPF_Cliente, ID_Chatbot, Endereco_Loja),
+    CONSTRAINT Vincula_Assistente_FK FOREIGN KEY (CPF_Cliente, ID_Chatbot) REFERENCES Chatbot(CPF_Cliente, ID_Chatbot),
+    CONSTRAINT Vincula_Loja_Parceira_FK FOREIGN KEY (Endereco_Loja) REFERENCES Loja_Parceira(Endereco_Loja)
 );
-
-
 
 
 -- Comandos de DROP TABLE
 DROP TABLE Cliente CASCADE CONSTRAINTS;
 DROP TABLE Automovel CASCADE CONSTRAINTS;
 DROP TABLE Assistente CASCADE CONSTRAINTS;
-DROP TABLE Oficina_Parceira CASCADE CONSTRAINTS;
+DROP TABLE Oficina CASCADE CONSTRAINTS;
+DROP TABLE Loja_Parceira CASCADE CONSTRAINTS;
 DROP TABLE Pre_Diagnostico CASCADE CONSTRAINTS;
 DROP TABLE Peca CASCADE CONSTRAINTS;
 DROP TABLE Entrega CASCADE CONSTRAINTS;
