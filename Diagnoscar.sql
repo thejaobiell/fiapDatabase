@@ -31,7 +31,7 @@ CREATE TABLE Chatbot(
     ID_Chatbot VARCHAR2(1000) NOT NULL,
     Horario_Chat_Chatbot DATE NOT NULL,
     Plano_Chatbot VARCHAR2(10) NOT NULL,
-    Tipodechat_Chatbot CHAR(1) NOT NULL,
+    Tipodechat_Chatbot VARCHAR2(1) NOT NULL,
     Cliente_CPF_Cliente VARCHAR2(14),
     CONSTRAINT Chatbot_PK PRIMARY KEY (ID_Chatbot, Cliente_CPF_Cliente),
     CONSTRAINT Chatbot_Cliente_FK FOREIGN KEY (Cliente_CPF_Cliente) REFERENCES Cliente(CPF_Cliente)
