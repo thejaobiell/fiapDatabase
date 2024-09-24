@@ -1,4 +1,4 @@
---João Gabriel Boaventura Marques e Silva 554874
+--JoÃ£o Gabriel Boaventura Marques e Silva 554874
 --Lucas de Melo Pinho Pinheiro 558791
 
 -- 1-)
@@ -65,22 +65,22 @@ CREATE TABLE Classifica (
 
 ----------------------------------------------------------------------------
 -- 2-)
-insert into CATEGORIA (Codcateg, Descricao) values (1, 'Comédia');
+insert into CATEGORIA (Codcateg, Descricao) values (1, 'Comï¿½dia');
 insert into CATEGORIA (Codcateg, Descricao) values (2, 'Drama');
 insert into CATEGORIA (Codcateg, Descricao) values (3, 'Aventura');
 insert into CATEGORIA (Codcateg, Descricao) values (4, 'Terror');
 
-insert into FILME (CodFilme, Titulo, CodCat) values (1, 'Sai pra lá', 1);
+insert into FILME (CodFilme, Titulo, CodCat) values (1, 'Sai pra lï¿½', 1);
 insert into FILME (CodFilme, Titulo, CodCat) values (2, 'Ajuda Eterna', 2);
 insert into FILME (CodFilme, Titulo, CodCat) values (3, 'Anjos Malditos', 2);
-insert into FILME (CodFilme, Titulo, CodCat) values (4, 'Pânico II', 4);
+insert into FILME (CodFilme, Titulo, CodCat) values (4, 'Pï¿½nico II', 4);
 insert into FILME (CodFilme, Titulo, CodCat) values (5, 'Um dia de furia', 3);
 insert into FILME (CodFilme, Titulo, CodCat) values (6, 'Lente Cega', 3);
 insert into FILME (CodFilme, Titulo, CodCat) values (7, 'Sinais do Tempo', 2);
 insert into FILME (CodFilme, Titulo, CodCat) values (8, 'A melodia da vida', 1);
 
-insert into CLIENTE (CodCli, Prenome, Sobrenome, Endereco, Telefone) values (1, 'João', 'Silva', 'Rua da Cruz sem Pé', '4444-1111');
-insert into CLIENTE (CodCli, Prenome, Sobrenome, Endereco, Telefone) values (2, 'Antônio', 'Ferreira', 'Av. da Vila Velha', '6660-9333');
+insert into CLIENTE (CodCli, Prenome, Sobrenome, Endereco, Telefone) values (1, 'Joï¿½o', 'Silva', 'Rua da Cruz sem Pï¿½', '4444-1111');
+insert into CLIENTE (CodCli, Prenome, Sobrenome, Endereco, Telefone) values (2, 'Antï¿½nio', 'Ferreira', 'Av. da Vila Velha', '6660-9333');
 insert into CLIENTE (CodCli, Prenome, Sobrenome, Endereco, Telefone) values (3, 'Fabio', 'Dias', 'Rua Antonio Vieira', '2337-0393');
 insert into CLIENTE (CodCli, Prenome, Sobrenome, Endereco, Telefone) values (4, 'Andreia', 'Melo', 'Rua da Praia Bonita', '8989-7777');
 insert into CLIENTE (CodCli, Prenome, Sobrenome, Endereco, Telefone) values (5, 'Murilo', 'Fontes', 'Av. dos Autonomistas', '9090-9090');
@@ -93,7 +93,7 @@ insert into DVD (NumDVD, CodFilme, Tipo) values (5, 3, 'S');
 -----------------------------------------------------
 
 -- 3-)
-insert into CATEGORIA (Codcateg, Descricao) values (8, 'Comédia');
+insert into CATEGORIA (Codcateg, Descricao) values (8, 'Comï¿½dia');
 update FILME SET CodCat = 8 where CodCat = 1;
 delete from CATEGORIA where Codcateg = 1;
 
@@ -101,7 +101,7 @@ delete from CATEGORIA where Codcateg = 1;
 ALTER table FILME ADD Sinopse varchar(300);
 
 -- 5-)
-insert into CATEGORIA (Codcateg, Descricao) values (5, 'Ficção');
+insert into CATEGORIA (Codcateg, Descricao) values (5, 'Ficï¿½ï¿½o');
 
 -- 6-)
 delete from DVD where CodFilme IN (
